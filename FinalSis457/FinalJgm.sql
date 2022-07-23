@@ -1,0 +1,37 @@
+﻿CREATE DATABASE FinalSis457Jgm;
+USE FinalSis457Jgm;
+
+CREATE TABLE Serie(
+ id  INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+ titulo  VARCHAR(250) NOT NULL,
+ sinopsis  VARCHAR(5000) NOT NULL,
+ director VARCHAR(100) NOT NULL,
+ duracion INT NOT NULL,
+ fechaEstreno DATE NOT NULL,
+ usuarioRegistro VARCHAR(12) NOT NULL,
+ registroActivo BIT NOT NULL
+);
+
+CREATE TABLE Usuario(
+id INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+ usuario VARCHAR(12) NOT NULL,
+ clave VARCHAR(250) NOT NULL, 
+ rol VARCHAR(20) NOT NULL,
+ registroActivo BIT NOT NULL
+);
+
+
+USE [master]
+GO
+CREATE LOGIN [usrfinal] WITH PASSWORD=N'12345678',
+DEFAULT_DATABASE=[master],
+CHECK_EXPIRATION=OFF,
+CHECK_POLICY=ON
+GO
+
+USE [FinalSis457Jgm]
+GO
+CREATE USER [usrfinal] FOR LOGIN [usrfinal]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [usrfinal]
+GO
